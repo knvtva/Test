@@ -1,1 +1,18 @@
-print("Test")
+local chatService = require(game.ServerScriptService:WaitForChild("ChatServiceRunner"):WaitForChild("ChatService"))
+
+local tags = {
+	[0] = {TagText = "TUTORIAL", TagColor = Color3.fromRGB(255, 0, 3183293967)}, -- The 0 must be changed to the the id of the user you want the tag to have
+}
+
+chatService.SpeakerAdded:Connect(function(playerName)
+	local speaker = chatService:GetSpeaker(playerName)
+	local player = game.Players[playerName]
+	
+	if tags[player.UserId] then
+		speaker:SetExtraData("Tags",{tags[player.UserId]})
+	end
+end)
+
+-- On line 5, change the numbers after fromRGB( to any colour you desire for the tag to be.
+-- Again on line 5, change the text that is in "" which it is displayed as TUTORIAL right now, just change that to what you want the tag name to be that will be displayed in the chat.
+-- Made by xontez! No credit needed.
